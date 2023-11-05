@@ -1,0 +1,52 @@
+﻿@using Formularz.Models;
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Formularz.Models.Dane;
+@{
+}
+<form asp-action="Form" method="post">
+    <div asp-validation-summary="All"></div>
+
+    <div>
+        <label asp-for="Imie">Twoje imie</label>
+        <input asp-for="Imie" minlength="2" required />
+    </div>
+    <div>
+        <label asp-for="Nazwisko">Twoje Nazwisko</label>
+        <input asp-for="Nazwisko" minlength="2" required />
+    </div>
+    <div>
+        <label asp-for="Email">Twój Email</label>
+        <input asp-for="Email" type="email" required />
+    </div>
+    <div>
+        <label asp-for="NumerTelefonu">Twój Numer Telefonu</label>
+        <input asp-for="NumerTelefonu" type="tel" pattern="[0-9]{9}" required />
+    </div>
+    <div>
+        <label asp-for="Wiek">Twój Wiek</label>
+        <input asp-for="Wiek" type="number" min="11" max="80" required />
+    </div>
+    <div>
+        <label asp-for="Haslo">Hasło</label>
+        <input asp-for="Haslo" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+               title="Hasło musi zawierać co najmniej 8 znaków, co najmniej jedną cyfrę, jedną dużą literę i jedną małą literę" required />
+    </div>
+    <div>
+        <label asp-for="Potwierdzenie">Potwierdź Hasło</label>
+        <input asp-for="Potwierdzenie" type="password" required oninput="validatePassword(this)" />
+        <span id="error-message"></span>
+    </div>
+    <div>
+        <select asp-for="Miasto" asp-items="Html.GetEnumSelectList<Dane.Miasta>()" required>
+            <option value="">Wybierz miasto</option>
+        </select>
+    </div>
+    <div>
+        <input type="submit" />
+    </div>
+    <div>
+        <input type="reset" value="Wyczyść" />
+    </div>
+</form>
